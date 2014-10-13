@@ -13,15 +13,15 @@ mod "maestrodev/wget"
 mod "puppetlabs/apache"
 
 mod 'vclmgmt',
-  :git => ''
+  :git => 'https://github.ncsu.edu/engr-csc-netlabs/oeudtinsanmie-vclmgmt.git'
 
 mod 'xcat',
-  :git => ''
+  :git => 'https://github.ncsu.edu/engr-csc-netlabs/oeudtinsanmie-xcat.git'
 
 mod 'dashboard',
-  :git => ''
+  :git => 'https://github.com/oeudtinsanmie/puppetlabs-dashboard.git'
 
 mod 'passenger',
-  :git => ''
+  :git => 'https://github.com/puppetlabs/puppetlabs-passenger.git'
 
 
