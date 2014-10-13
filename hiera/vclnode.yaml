@@ -1,0 +1,103 @@
+---
+classes:
+  - network
+  - dashboard
+
+packages:
+  - zlib-devel
+  - ruby-devel
+  - gcc-c++
+  - libcurl-devel
+
+dashboard::dashboard_ensure: 
+dashboard::dashboard_user: 
+dashboard::dashboard_group: 
+dashboard::dashboard_password: 
+dashboard::dashboard_db: 
+dashboard::dashboard_charset: utf8
+dashboard::dashboard_port: 
+dashboard::mysql_root_pw: 
+dashboard::passenger: true
+
+passenger::package_dependencies: false
+
+mgmt_node:
+  usexcat: true
+  vcluser_pw: 
+  root_pw: 
+  system_pw: 
+  ipmi_mac: 
+  private_mac: 
+  public_mac: 
+  private_if: 
+  private_ip: 
+  private_domain: 
+  ipmi_if: 
+  ipmi_ip: 
+  firewalldefaults: {}
+  poddefaults:
+    defaults: 
+      private_if: 
+      tgt_os: centos6.5
+      profile: centos65-test
+      ipmi_user: 
+      ipmi_pw:      
+  pods:
+    nl3pod20:
+      private_hash: 
+        vlan_alias_ip: 
+        network: 
+        netmask: 
+        domain: 
+        vlanid: 
+      ipmi_hash: 
+        vlan_alias_ip: 
+        network: 
+        netmask: 
+        domain: 
+        vlanid: 
+      nodes: 
+        netlab3-pod20-t310: 
+          public_ip: 
+          private_ip: 
+          ipmi_ip: 
+          public_mac: 
+          private_mac: 
+          ipmi_mac: 
+
+srcdirs:
+  /cds:
+    ensure: directory
+
+base_images:
+  centos6.5:
+    url: http://ftp.linux.ncsu.edu/pub/CentOS/6.5/isos/x86_64/CentOS-6.5-x86_64-bin-DVD1.iso
+    filepath: /cds/CentOS-6.5-x86_64-bin-DVD1.iso
+    architecture: x86_64
+    os: centos5
+    distro: centos6.5
+    prettyname: Centos-6.5
+    description: 'testing update with test description'
+
+xtemplates:
+  centos65-test:
+    os: centos
+    installmode: text
+    partitions: 
+      - 'part swap --size 1024'
+      - 'part / --size 1 --grow --fstype ext3'
+    pkgs: 
+      - '@ Desktop'
+      - autofs
+      - ksh
+      - tcsh
+      - ntp
+      - nfs-utils
+      - net-snmp
+      - openssh-server
+      - util-linux-ng
+    prescripts: 
+      - pre.rh
+    postscripts:
+      - post.rh
+
