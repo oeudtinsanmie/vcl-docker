@@ -11,3 +11,6 @@ ADD manifests/hostnode.pp /etc/puppet/manifests/hostnode.pp
 ADD hiera/vclnode.yaml /etc/puppet/hiera/nodes/vclnode.yaml
 ADD hiera/hostnode.yaml /etc/puppet/hiera/nodes/hostnode.yaml
 
+RUN cd /etc/puppet;librarian-puppet init;librarian-puppet install --clean
+RUN cd /etc/puppet;puppet apply --debug manifests --modulepath /etc/puppet/modules
+
