@@ -14,6 +14,7 @@ mod "puppetlabs/apache"
 
 mod 'vclmgmt',
   :git => 'https://github.ncsu.edu/engr-csc-netlabs/oeudtinsanmie-vclmgmt.git'
+  :ref => 'dev'
 
 mod 'xcat',
   :git => 'https://github.ncsu.edu/engr-csc-netlabs/oeudtinsanmie-xcat.git'
