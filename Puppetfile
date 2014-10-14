@@ -13,11 +13,11 @@ mod "maestrodev/wget"
 mod "puppetlabs/apache"
 
 mod 'vclmgmt',
-  :git => 'https://github.ncsu.edu/engr-csc-netlabs/oeudtinsanmie-vclmgmt.git'
+  :git => 'https://github.com/oeudtinsanmie/oeudtinsanmie-vclmgmt.git'
   :ref => 'dev'
 
 mod 'xcat',
-  :git => 'https://github.ncsu.edu/engr-csc-netlabs/oeudtinsanmie-xcat.git'
+  :git => 'https://github.com/oeudtinsanmie/oeudtinsanmie-xcat.git'
 
 mod 'dashboard',
   :git => 'https://github.com/oeudtinsanmie/puppetlabs-dashboard.git'
