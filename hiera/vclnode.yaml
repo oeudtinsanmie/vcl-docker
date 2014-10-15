@@ -1,13 +1,11 @@
 ---
 classes:
   - network
+
+afterclasses:
   - dashboard
 
-packages:
-  - zlib-devel
-  - ruby-devel
-  - gcc-c++
-  - libcurl-devel
+# packages:
 
 dashboard::dashboard_ensure: 
 dashboard::dashboard_user: 
@@ -23,47 +21,47 @@ passenger::package_dependencies: false
 
 mgmt_node:
   usexcat: true
-  vcluser_pw: 
-  root_pw: 
-  system_pw: 
-  ipmi_mac: 
-  private_mac: 
-  public_mac: 
-  private_if: 
-  private_ip: 
-  private_domain: 
-  ipmi_if: 
-  ipmi_ip: 
+  vcluser_pw: changeme
+  root_pw: changemetoo
+  system_pw: andmeaswell
+  ipmi_mac: 01:22:33:45:66:72
+  private_mac: 01:22:33:45:66:76
+  public_mac: 01:22:33:45:66:77
+  private_if: em2
+  private_ip: 192.168.1.1
+  private_domain: spiffy
+  ipmi_if: p4p1
+  ipmi_ip: 192.168.11.1
   firewalldefaults: {}
   poddefaults:
     defaults: 
-      private_if: 
+      private_if: em2
       tgt_os: centos6.5
       profile: centos65-test
-      ipmi_user: 
-      ipmi_pw:      
+      ipmi_user: spiffy
+      ipmi_pw: reallychangepws
   pods:
     nl3pod20:
       private_hash: 
-        vlan_alias_ip: 
-        network: 
-        netmask: 
-        domain: 
-        vlanid: 
+        vlan_alias_ip: 192.168.5.1
+        network: 192.168.5.0
+        netmask: 255.255.255.192
+        domain: spiffytoo
+        vlanid: 107
       ipmi_hash: 
-        vlan_alias_ip: 
-        network: 
-        netmask: 
-        domain: 
-        vlanid: 
+        vlan_alias_ip: 192.168.15.1
+        network: 192.168.15.0
+        netmask: 255.255.255.192
+        domain: ipmi.spiffytoo
+        vlanid: 1107
       nodes: 
         netlab3-pod20-t310: 
-          public_ip: 
-          private_ip: 
-          ipmi_ip: 
-          public_mac: 
-          private_mac: 
-          ipmi_mac: 
+          public_ip: 10.10.10.10 
+          private_ip: 192.168.5.27
+          ipmi_ip: 192.168.15.27
+          public_mac: 01:22:33:45:66:79
+          private_mac: 01:22:33:45:66:71
+          ipmi_mac: 01:22:33:45:66:74
 
 srcdirs:
   /cds:

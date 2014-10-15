@@ -3,15 +3,16 @@
 
 forge "https://forgeapi.puppetlabs.com"
 
-mod "razorsedge/network"
 mod "puppetlabs/mysql"
 mod "puppetlabs/vcsrepo"
 mod "puppetlabs/firewall"
 mod "puppetlabs/stdlib"
 mod "gini/archive"
 mod "maestrodev/wget"
-mod "puppetlabs/apache"
-mod 'puppetlabs/passenger'
+mod 'puppetlabs-apache'
+
+mod "razorsedge-network",
+  :git => 'https://github.com/oeudtinsanmie/puppet-network.git'
 
 mod 'oeudtinsanmie-xcat',
   :git => 'https://github.com/oeudtinsanmie/oeudtinsanmie-xcat.git'
@@ -21,4 +22,9 @@ mod 'oeudtinsanmie-vclmgmt',
   :ref => 'dev'
 
 mod 'oeudtinsanmie-dashboard',
-  :git => 'https://github.com/oeudtinsanmie/puppetlabs-dashboard.git'
+  :git => 'https://github.com/oeudtinsanmie/puppetlabs-dashboard.git',
+  :ref => 'dev'
+
+mod 'oeudtinsanmie-passenger',
+  :git => 'https://github.com/oeudtinsanmie/puppetlabs-passenger.git',
+  :ref => 'dev'
