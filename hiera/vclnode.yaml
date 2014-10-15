@@ -1,10 +1,10 @@
 ---
 classes:
   - rvm
-  - rvm::passenger::apache
   - network
 
 afterclasses:
+  - rvm::passenger::apache
   - dashboard
  
 #packages:
@@ -14,7 +14,7 @@ rvm::system_rubies:
     ensure: present
     default_use: true
     build_opts: 
-      - --binary
+      - '--binary'
       
 files:
   /home/user/rvmrc:
@@ -23,8 +23,8 @@ files:
     mode: 0664
     before: Class['rvm']
     
-rvm::passenger::apache::version: 4.0.53
-rvm::passenger::apache::ruby_version: ruby-2.1
+rvm::passenger::apache::version: '4.0.53'
+rvm::passenger::apache::ruby_version: '2.1'
 
 dashboard::dashboard_ensure: present
 dashboard::dashboard_user: dash-usr

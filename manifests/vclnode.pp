@@ -31,6 +31,5 @@ node default {
 	}
 
 	File <| tag=="srcdir" |> -> Vclmgmt::Baseimage <| |>	
-	File <| tag=="srcdir" |> -> Exec['compile-passenger']	
 }
 
