@@ -10,6 +10,7 @@ mod "puppetlabs/stdlib"
 mod "gini/archive"
 mod "maestrodev/wget"
 mod 'puppetlabs-apache'
+mod "maestrodev/rvm"
 
 mod "razorsedge-network",
   :git => 'https://github.com/oeudtinsanmie/puppet-network.git'
@@ -23,8 +24,4 @@ mod 'oeudtinsanmie-vclmgmt',
 
 mod 'oeudtinsanmie-dashboard',
   :git => 'https://github.com/oeudtinsanmie/puppetlabs-dashboard.git',
-  :ref => 'dev'
-
-mod 'oeudtinsanmie-passenger',
-  :git => 'https://github.com/oeudtinsanmie/puppetlabs-passenger.git',
   :ref => 'dev'
