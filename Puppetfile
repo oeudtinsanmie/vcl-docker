@@ -12,6 +12,7 @@ mod "gini/archive"
 mod "maestrodev/wget"
 mod "puppetlabs/apache"
 mod 'puppetlabs/passenger'
+mod "maestrodev/rvm"
 
 mod 'oeudtinsanmie-xcat',
   :git => 'https://github.com/oeudtinsanmie/oeudtinsanmie-xcat.git'

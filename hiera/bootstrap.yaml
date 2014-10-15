@@ -1,0 +1,18 @@
+---
+classes:
+  - rvm
+ 
+rvm::system_rubies:
+  '2.1':
+    ensure: present
+    default_use: true
+    build_opts: 
+      - --binary
+      
+files:
+  /home/user/rvmrc:
+    content: 'umask u=rwx,g=rwx,o=rx
+             export rvm_max_time_flag=20'
+    mode: 0664
+    before: Class['rvm']
+

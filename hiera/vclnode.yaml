@@ -1,69 +1,85 @@
 ---
 classes:
+  - rvm
+  - rvm::passenger::apache
   - network
   - dashboard
+ 
+#packages:
 
-packages:
-  - zlib-devel
-  - ruby-devel
-  - gcc-c++
-  - libcurl-devel
+rvm::system_rubies:
+  '2.1':
+    ensure: present
+    default_use: true
+    build_opts: 
+      - --binary
+      
+files:
+  /home/user/rvmrc:
+    content: 'umask u=rwx,g=rwx,o=rx
+             export rvm_max_time_flag=20'
+    mode: 0664
+    before: Class['rvm']
+    
+rvm::passenger::apache::version: 4.0.53
+rvm::passenger::apache::ruby_version: ruby-2.1
 
-dashboard::dashboard_ensure: 
-dashboard::dashboard_user: 
-dashboard::dashboard_group: 
-dashboard::dashboard_password: 
-dashboard::dashboard_db: 
+dashboard::dashboard_ensure: present
+dashboard::dashboard_user: dash-usr
+dashboard::dashboard_group: dash-grp
+dashboard::dashboard_password: changedashpw
+dashboard::dashboard_db: dashdb
 dashboard::dashboard_charset: utf8
-dashboard::dashboard_port: 
-dashboard::mysql_root_pw: 
+dashboard::dashboard_port: 8080
+dashboard::mysql_root_pw: changemysqlpw
 dashboard::passenger: true
+dashboard::passenger_install: false
 
 passenger::package_dependencies: false
 
 mgmt_node:
   usexcat: true
-  vcluser_pw: 
-  root_pw: 
-  system_pw: 
+  vcluser_pw: changeusrpw
+  root_pw: changemysqlpw
+  system_pw: changerootpw
   ipmi_mac: 
   private_mac: 
   public_mac: 
   private_if: 
-  private_ip: 
-  private_domain: 
+  private_ip: 192.168.5.1
+  private_domain: mynet
   ipmi_if: 
-  ipmi_ip: 
+  ipmi_ip: 192.168.15.1
   firewalldefaults: {}
   poddefaults:
     defaults: 
-      private_if: 
+      private_if: em2
       tgt_os: centos6.5
       profile: centos65-test
-      ipmi_user: 
-      ipmi_pw:      
+      ipmi_user: root
+      ipmi_pw: changeipmipw
   pods:
     nl3pod20:
       private_hash: 
-        vlan_alias_ip: 
-        network: 
-        netmask: 
-        domain: 
-        vlanid: 
+        vlan_alias_ip: 192.168.105.1
+        network: 192.168.105.0
+        netmask: 255.255.255.193
+        domain: pod20.mynet
+        vlanid: 200
       ipmi_hash: 
-        vlan_alias_ip: 
-        network: 
-        netmask: 
-        domain: 
-        vlanid: 
+        vlan_alias_ip: 192.168.115.1
+        network: 192.168.115.0
+        netmask: 255.255.255.193
+        domain: ipmi.pod20.mynet
+        vlanid: 1200
       nodes: 
         netlab3-pod20-t310: 
-          public_ip: 
-          private_ip: 
-          ipmi_ip: 
-          public_mac: 
-          private_mac: 
-          ipmi_mac: 
+          public_ip: 10.10.10.10
+          private_ip: 192.168.105.27
+          ipmi_ip: 192.168.115.27
+          public_mac: 00:11:22:33:44:55:66
+          private_mac: 00:11:22:33:44:55:67 
+          ipmi_mac: 00:11:22:33:44:55:68
 
 srcdirs:
   /cds:
