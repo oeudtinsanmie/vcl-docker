@@ -1,35 +1,25 @@
 node default {
 	hiera_include('classes')
+	
+	$pkgs = hiera_hash('packages', undef)
+	if $pkgs != undef {
+	  create_resources(package, $pkgs)
+	}
   
-	$mgmt_node = hiera_hash('mgmt_node')
-	ensure_resource('class', 'vclmgmt', $mgmt_node)
+	$images = hiera_hash('base_images', undef)
+	if $images != undef {
+	  create_resources(vclmgmt::baseimage, $images)
+	}
 	
-	$srcdirs = hiera_hash('srcdirs')
-	create_resources(file, $srcdirs, { tag => "srcdir" })
-	$images = hiera_hash('base_images')
-	create_resources(vclmgmt::baseimage, $images)
-	
-	$xcat_templates = hiera_hash('xtemplates')
-	create_resources(xcat::template, $xcat_templates)
-
-	hiera_include('afterclasses')
-	
-	firewall { "120 accept puppet dashboard 8080":
-      		chain => 'INPUT',
-		proto => 'tcp',
-		dport => 8080,
-		action => 'accept',
-		destination => $::fqdn,
+	$xcat_templates = hiera_hash('xtemplates', undef)
+	if $xcat_templates != undef {
+	  create_resources(xcat::template, $xcat_templates)
 	}
 
-	firewall { "125 accept puppet agent 8140":
-      		chain => 'INPUT',
-		proto => 'tcp',
-		dport => 8140,
-		action => 'accept',
-		destination => $::fqdn,
+	$firewalls = hiera_hash('firewalls', undef)
+	if $firewalls != undef {
+	  create_resources(firewall, $firewalls)
 	}
-
-	File <| tag=="srcdir" |> -> Vclmgmt::Baseimage <| |>	
+  
 }
 

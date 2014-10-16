@@ -3,9 +3,9 @@
   - yaml
 :hierarchy:
   - defaults
-  - "nodes/%::fqdn"
-  - "%{clientcert}"
-  - "%{environment}"
+  - "local/%{::ipaddress_docker0}"
+  - "%{::clientcert}"
+  - "%{::environment}"
   - global
 
 :yaml:

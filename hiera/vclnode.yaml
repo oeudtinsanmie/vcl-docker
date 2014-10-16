@@ -2,8 +2,7 @@
 classes:
   - rvm
   - network
-
-afterclasses:
+  - vclmgmt
   - rvm::passenger::apache
   - dashboard
  
@@ -37,53 +36,49 @@ dashboard::mysql_root_pw: changemysqlpw
 dashboard::passenger: true
 dashboard::passenger_install: false
 
-mgmt_node:
-  usexcat: true
-  vcluser_pw: changeusrpw
-  root_pw: changemysqlpw
-  system_pw: changerootpw
-  ipmi_mac: 
-  private_mac: 
-  public_mac: 
-  private_if: 
-  private_ip: 192.168.5.1
-  private_domain: mynet
-  ipmi_if: 
-  ipmi_ip: 192.168.15.1
-  firewalldefaults: {}
-  poddefaults:
-    defaults: 
-      private_if: em2
-      tgt_os: centos6.5
-      profile: centos65-test
-      ipmi_user: root
-      ipmi_pw: changeipmipw
-  pods:
-    nl3pod20:
-      private_hash: 
-        vlan_alias_ip: 192.168.105.1
-        network: 192.168.105.0
-        netmask: 255.255.255.193
-        domain: pod20.mynet
-        vlanid: 200
-      ipmi_hash: 
-        vlan_alias_ip: 192.168.115.1
-        network: 192.168.115.0
-        netmask: 255.255.255.193
-        domain: ipmi.pod20.mynet
-        vlanid: 1200
-      nodes: 
-        netlab3-pod20-t310: 
-          public_ip: 10.10.10.10
-          private_ip: 192.168.105.27
-          ipmi_ip: 192.168.115.27
-          public_mac: 00:11:22:33:44:55:66
-          private_mac: 00:11:22:33:44:55:67 
-          ipmi_mac: 00:11:22:33:44:55:68
 
-srcdirs:
-  /cds:
-    ensure: directory
+vclmgmt::usexcat: true
+vclmgmt::vcluser_pw: changeusrpw
+vclmgmt::root_pw: changemysqlpw
+vclmgmt::system_pw: changerootpw
+vclmgmt::ipmi_mac: 
+vclmgmt::private_mac: 
+vclmgmt::public_mac: 
+vclmgmt::private_if: 
+vclmgmt::private_ip: 192.168.5.1
+vclmgmt::private_domain: mynet
+vclmgmt::ipmi_if: 
+vclmgmt::ipmi_ip: 192.168.15.1
+vclmgmt::firewalldefaults: {}
+vclmgmt::poddefaults:
+  defaults: 
+    private_if: em2
+    tgt_os: centos6.5
+    profile: centos65-test
+    ipmi_user: root
+    ipmi_pw: changeipmipw
+vclmgmt::pods:
+  nl3pod20:
+    private_hash: 
+      vlan_alias_ip: 192.168.105.1
+      network: 192.168.105.0
+      netmask: 255.255.255.193
+      domain: pod20.mynet
+      vlanid: 200
+    ipmi_hash: 
+      vlan_alias_ip: 192.168.115.1
+      network: 192.168.115.0
+      netmask: 255.255.255.193
+      domain: ipmi.pod20.mynet
+      vlanid: 1200
+    nodes: 
+      netlab3-pod20-t310: 
+        public_ip: 10.10.10.10
+        private_ip: 192.168.105.27
+        ipmi_ip: 192.168.115.27
+        public_mac: 00:11:22:33:44:55:66
+        private_mac: 00:11:22:33:44:55:67 
+        ipmi_mac: 00:11:22:33:44:55:68
 
 base_images:
   centos6.5:
@@ -117,3 +112,16 @@ xtemplates:
     postscripts:
       - post.rh
 
+firewalls:
+  "120 accept puppet dashboard 8080":
+    chain: INPUT
+    proto: tcp
+    dport: 8080
+    action: accept
+    destination: $::fqdn
+  "125 accept puppet agent 8140":
+    chain: INPUT
+    proto: tcp
+    dport: 8140
+    action: accept
+    destination: $::fqdn

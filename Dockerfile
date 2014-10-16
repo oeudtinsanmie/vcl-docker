@@ -14,5 +14,6 @@ ADD hiera/hostnode.yaml /etc/puppet/hiera/nodes/hostnode.yaml
 ADD hiera.yaml /etc/hiera.yaml
 
 RUN cd /etc/puppet;librarian-puppet init;librarian-puppet install --clean
-RUN cd /etc/puppet;puppet apply --debug manifests --modulepath /etc/puppet/modules
 
+EXPOSE 8080
+EXPOSE 443
