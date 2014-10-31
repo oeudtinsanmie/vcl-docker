@@ -9,7 +9,7 @@ classes:
 #packages:
 
 rvm::system_rubies:
-  '2.1':
+  'ruby-2.1.4':
     ensure: present
     default_use: true
     build_opts: 
@@ -23,7 +23,7 @@ files:
     before: Class['rvm']
     
 rvm::passenger::apache::version: '4.0.53'
-rvm::passenger::apache::ruby_version: '2.1'
+rvm::passenger::apache::ruby_version: 'ruby-2.1.4'
 
 dashboard::dashboard_ensure: present
 dashboard::dashboard_user: dash-usr
@@ -38,12 +38,14 @@ dashboard::passenger_install: false
 
 
 vclmgmt::usexcat: true
+vclmgmt::vclversion: latest
 vclmgmt::vcluser_pw: changeusrpw
 vclmgmt::root_pw: changemysqlpw
 vclmgmt::system_pw: changerootpw
 vclmgmt::ipmi_mac: 
 vclmgmt::private_mac: 
 vclmgmt::public_mac: 
+vclmgmt::public_if: 
 vclmgmt::private_if: 
 vclmgmt::private_ip: 192.168.5.1
 vclmgmt::private_domain: mynet
@@ -118,10 +120,8 @@ firewalls:
     proto: tcp
     dport: 8080
     action: accept
-    destination: $::fqdn
   "125 accept puppet agent 8140":
     chain: INPUT
     proto: tcp
     dport: 8140
     action: accept
-    destination: $::fqdn
